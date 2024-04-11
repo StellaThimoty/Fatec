@@ -19,7 +19,6 @@ const [Value, setValue] = useState(defaultValue)
       <input type={type} name="text" 
       id={id} 
       value={Value} 
-      defaultValue={defaultValue}
       onChange={((e) => setValue(e.target.value))}
       />
     </>
