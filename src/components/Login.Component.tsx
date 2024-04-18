@@ -1,14 +1,14 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useContext, useState } from 'react';
+import { AuthContext } from '../hooks/AuthProvider';
 import LoginT from '../types/login.type';
-import { useAuth } from '../hooks/AuthProvider';
 
-const Login = () => {
+
+const LoginC = () => {
   const [input, setInput] = useState<LoginT>({
     email: "",
     password: "",
   })
-
-  const auth = useAuth()
+  const auth = useContext(AuthContext)
   const handleSubmit = (e:FormEvent) => {
     e.preventDefault()
     if (input.email !== "" && input.password !== "") {
@@ -24,16 +24,17 @@ const Login = () => {
   }
   return(
     <>
+    <h1>Logar</h1>
       <form onSubmit={handleSubmit}>
-        <div className='card'>
+        <div className=''>
           <label htmlFor="email">Email</label>
-          <input type="email" name="email" id="email" onChange={handleInput} />
+          <input type="email" name="email" id="logemail" onChange={handleInput} />
         </div>
-        <div className='card'>
+        <div className=''>
           <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" onChange={handleInput} />
+          <input type="password" name="password" id="logpassword" onChange={handleInput} />
         </div>
-        <div className='card'>
+        <div className=''>
           <button disabled={input === undefined ? true : false} type='submit'>Submit</button>
           </div>
     </form>
@@ -41,4 +42,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default LoginC

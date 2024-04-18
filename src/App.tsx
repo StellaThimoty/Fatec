@@ -1,15 +1,16 @@
+import { useContext } from 'react';
 import './App.css'
-import Login from './components/Login';
-import AuthProvider from './hooks/AuthProvider';
+import { AuthContext } from './hooks/AuthProvider';
+import TaskMapper from './components/TaskMapper.Component';
+
 
 const App = () => {
+  const user = useContext(AuthContext)
   return (
-    <>
-    <AuthProvider>
-      <h1>Fatec aula</h1>
-      <Login></Login>
-    </AuthProvider>
-    </>
+    <AuthContext.Provider value={user}>
+      <h1>Projeto de tasks fatec</h1>
+      <TaskMapper/>
+    </AuthContext.Provider>
   )
 }
 

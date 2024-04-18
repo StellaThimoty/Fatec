@@ -1,25 +1,38 @@
-import { useContext, createContext, useState } from "react"
-// import { useNavigate } from "react-router-dom"
+import { createContext, useState } from "react"
 import Token from "../types/token.type"
-import Login from "../types/login.type"
+import LoginT from "../types/login.type"
+import SinginT from "../types/singin.type"
+
+type Signinreturn = {
+  id: number,
+  name: string,
+  email: string,
+}
 
 type AuthType = {
-  tokenstr: string,
-  loginAction: (data:Login) => Promise<Token>,
+  token: Token,
+  loginAction: (data:LoginT) => Promise<Token>,
+  singinAction: (data:SinginT) => Promise<Signinreturn>,
   logOut: () => void,
 }
 
-const AuthContext = createContext<AuthType | null>(null)
+export const AuthContext = createContext<AuthType | undefined>(undefined)
 
-const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
-  const [tokenstr, setTokenstr] = useState<string>(localStorage.getItem("site") || "")
-  // const navigate = useNavigate()
+export const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
+  const [token, setToken] = useState<Token>({
+    token: localStorage.getItem("site") || "",
+    refreshToken: "",
+    expiresAt: new Date()
+  })
   const logOut = () => {
-    setTokenstr("")
+    setToken({
+      token: "",
+      refreshToken: "",
+      expiresAt: new Date()
+    })
     localStorage.removeItem("site")
-    // navigate("/login")
   }
-  const loginAction = async (data:Login):Promise<Token> => {
+  const loginAction = async (data:LoginT):Promise<Token> => {
       const response:Response = await fetch("https://render-deploy-fatec.onrender.com/auth/login", {
         method: "POST",
         headers: {
@@ -30,20 +43,29 @@ const AuthProvider: React.FC<{children: React.ReactNode}> = ({ children }) => {
       
       const res:Token = await response.json()
       if (res) {
-        setTokenstr(res.token)
+        setToken(res)
         localStorage.setItem("site", res.token)
-        // navigate("/")
         return res
       }
 
       return res
   }
+  const singinAction = async (data:SinginT):Promise<Signinreturn> => {
+    const response:Response = await fetch("https://render-deploy-fatec.onrender.com/auth/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+    
+    const res:Signinreturn = await response.json()
+    if (res) {
+      return res
+    }
+
+    return res
+}
   
-  return <AuthContext.Provider value={{tokenstr, loginAction, logOut}}>{children}</AuthContext.Provider>
+  return <AuthContext.Provider value={{token, loginAction, singinAction, logOut}}>{children}</AuthContext.Provider>
 }
-
-export const useAuth = () => {
-  return useContext(AuthContext)
-}
-
-export default AuthProvider

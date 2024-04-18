@@ -37,6 +37,10 @@
   padding: 2em;
 }
 
+.task{
+  display: flex;
+}
+
 input{
   color: red;
 }
