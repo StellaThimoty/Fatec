@@ -1,5 +1,5 @@
-import SinginC from './SignIn.Component';
-import LoginC from './Login.Component';
+import SinginC from './Layout/SignIn.Component';
+import LoginC from './Layout/Login.Component';
 import { useContext } from 'react';
 import { AuthContext } from '../hooks/AuthProvider';
 const Auth = () => {

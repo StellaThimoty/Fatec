@@ -2,9 +2,10 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { ChakraProvider } from '@chakra-ui/react'
 import './index.css'
-import Contato from './components/Contato.Component.tsx'
-import About from './components/About.Component.tsx'
+import Contato from './components/Layout/Contato.Component.tsx'
+import About from './components/Layout/About.Component.tsx'
 import Auth from './components/Auth.Component.tsx'
 
 const router = createBrowserRouter([
@@ -28,6 +29,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router}/>
+    <ChakraProvider>
+      <RouterProvider router={router}/>
+    </ChakraProvider>
   </React.StrictMode>,
 )
