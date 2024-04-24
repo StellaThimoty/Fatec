@@ -1,10 +1,11 @@
+import { Form } from "react-router-dom"
 import InputBox from "./InputBox.Component"
 
 const Contato = () => {
   return (
     <>
       <h1>Fatec Contato</h1>
-      <form>
+      <Form>
       <div className='card'>
         <InputBox
         defaultValue="Nome"
@@ -30,7 +31,7 @@ const Contato = () => {
         />
         </div>
         <div className='card'><button>Submit</button></div>
-      </form>
+      </Form>
     </>
   )
 }

@@ -1,6 +1,7 @@
 import { FormEvent, useContext, useState } from 'react';
 import { AuthContext } from '../hooks/AuthProvider';
 import LoginT from '../types/login.type';
+import { Form } from 'react-router-dom';
 
 
 const LoginC = () => {
@@ -25,7 +26,7 @@ const LoginC = () => {
   return(
     <>
     <h1>Logar</h1>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <div className=''>
           <label htmlFor="email">Email</label>
           <input type="email" name="email" id="logemail" onChange={handleInput} />
@@ -37,7 +38,7 @@ const LoginC = () => {
         <div className=''>
           <button disabled={input === undefined ? true : false} type='submit'>Submit</button>
           </div>
-    </form>
+    </Form>
 </>
   )
 }

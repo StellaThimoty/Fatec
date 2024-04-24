@@ -2,8 +2,8 @@ import { useContext } from 'react';
 import './App.css'
 import { AuthContext } from './hooks/AuthProvider';
 import TaskMapper from './components/TaskMapper.Component';
-import Footer from './components/Footer.Component';
-import Navbar from './components/Navbar.Component';
+import Footer from './components//Layout/Footer.Component';
+import Navbar from './components/Layout/Navbar.Component';
 
 
 const App = () => {

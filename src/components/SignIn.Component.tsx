@@ -1,6 +1,7 @@
 import { FormEvent, useContext, useState } from 'react';
 import SinginT from '../types/singin.type';
 import { AuthContext } from '../hooks/AuthProvider';
+import { Form } from 'react-router-dom';
 
 const SinginC = () => {
   const [input, setInput] = useState<SinginT>({
@@ -25,7 +26,7 @@ const SinginC = () => {
   return(
     <>
     <h1>Registrar</h1>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit}>
       <div className=''>
           <label htmlFor="name">Name</label>
           <input type="text" name="name" id="singname" onChange={handleInput} />
@@ -41,7 +42,7 @@ const SinginC = () => {
         <div className='card'>
           <button disabled={input === undefined ? true : false} type='submit'>Submit</button>
           </div>
-    </form>
+    </Form>
 </>
   )
 }
