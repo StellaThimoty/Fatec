@@ -1,4 +1,3 @@
-import { Grid, GridItem } from '@chakra-ui/react'
 import Navbar from './Navbar.Component'
 import Footer from './Footer.Component'
 
@@ -8,17 +7,15 @@ type Props = {
 
 const Layout = ({children}: Props) => {
     return (
-        <Grid>
-            <GridItem>
-                <Navbar/>
-            </GridItem>
-            <GridItem>
-                {children}
-            </GridItem>
-            <GridItem>
-                <Footer/>
-            </GridItem>
-        </Grid>
+        <>
+        <div className="container">
+            <Navbar/>
+            <div className="main">
+            {children}            
+            </div>
+            <Footer/>
+        </div>
+        </>
     )
 }
 

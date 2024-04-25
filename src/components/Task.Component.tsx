@@ -1,13 +1,18 @@
 import Task from "../types/task.type"
+import { Box, Stack, Button, ButtonGroup, Heading } from '@chakra-ui/react'
 
 const TaskC = ({title, completed}:Task) => {
   return (
     <>
-      <label htmlFor="checkbox">{title}</label>
-      <div className="task">
-        <input type="checkbox" name="checkbox" id="checkbox" defaultChecked={completed} />
-        <h2>Completed</h2>
-      </div>
+      <Box p={5} shadow='md' borderWidth='1px'>
+            <Stack direction='row' alignItems='center' justifyItems='center' justifyContent='space-between'>
+            <Heading>{title}</Heading>
+            <ButtonGroup spacing='2'>
+              <Button colorScheme={completed ? 'green' : 'blue'} variant='outline'>{completed ? "Completa" : "Pendente"}</Button>
+              <Button colorScheme='red' variant='solid'>Excluir</Button>
+            </ButtonGroup>
+            </Stack>
+      </Box>
     </>
   )
 }
